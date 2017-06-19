@@ -16,6 +16,44 @@
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const inputBox = document.querySelector('.search');
+const cityData = [];
+
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => cityData.push(...data));
+
+function matchString() {
+  const filteredData = cityData.filter(data => {
+    const regexp = new RegExp(this.value, `gi`);
+    return data.city.match(regexp) || data.state.match(regexp);
+  });
+
+  return filteredData;
+}
+
+function displayData() {
+  const filteredArr = (matchString.bind(this))();
+  const dropDown = document.querySelector('.suggestions');
+
+  const html = filteredArr.map(city => {
+    const highlightedString = string => {
+      const regexp = new RegExp(this.value, `gi`);
+      return string.replace(regexp, `<span class='hl'>${this.value}</span>`);
+    }
+
+    return `
+      <li>
+        <span>${highlightedString(city.city)}, ${highlightedString(city.state)}</span>
+        <span>${String(city.population).replace(/(.)(?=(\d{3})+$)/g,'$1,')}</span>
+      </li>
+    `;
+  }).join('');
+
+  dropDown.innerHTML = html;
+}
+
+inputBox.addEventListener('input', displayData);
 
 </script>
   </body>
