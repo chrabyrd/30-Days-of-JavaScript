@@ -18,28 +18,45 @@
     }
 
     // Regular
+    console.log('hi');
 
     // Interpolated
+    console.log(`${'wow!'}`);
 
     // Styled
+    console.log('%c Hello', 'color:blue');
 
     // warning!
+    console.warn('Ahh!');
 
     // Error :|
+    console.error('Danger Will Robinson');
 
     // Info
+    console.info('Fun fact # 4');
 
     // Testing
+    console.assert(1 === 1, "What?!");
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    console.dir(p);
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.group('dogs');
+      console.log(`${dog}`);
+      console.groupEnd('dogs');
+    });
 
     // counting
+    console.count('dog');
 
     // timing
+    console.time('Time');
+    console.timeEnd('Time');
 
   </script>
 </body>
