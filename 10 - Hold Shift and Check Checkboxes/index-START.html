@@ -99,6 +99,38 @@
   </div>
 
 <script>
+  const boxes = document.querySelectorAll('input[type="checkbox"]');
+  let shiftPressed = false;
+
+  document.addEventListener('keydown', e => {
+    if (e.keyCode == 16) shiftPressed = true;
+  });
+
+  document.addEventListener('keyup', e => {
+    if (e.keyCode == 16) shiftPressed = false;
+  });
+
+  function fillLine() {
+    if (shiftPressed) {
+      let head = undefined;
+      let tail = undefined;
+
+      boxes.forEach(box => {
+        if (box.checked && head === undefined) {
+          head = true;
+        } else if (box.checked) {
+          tail = true;
+        } else if (head !== undefined && !tail){
+          box.checked = true;
+        } else {
+          return
+        }
+      });
+    }
+  }
+
+  boxes.forEach(box => box.addEventListener('click', fillLine));
+
 </script>
 </body>
 </html>
