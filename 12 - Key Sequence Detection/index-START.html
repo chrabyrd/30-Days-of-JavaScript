@@ -7,6 +7,16 @@
 </head>
 <body>
 <script>
+  const keylog = [];
+  const secretCode = [...'hello']
+
+  window.addEventListener('keyup', e => {
+    if (keylog.length === 5) keylog.shift();
+
+    keylog.push(e.key);
+
+    if (keylog.join() === secretCode.join()) cornify_add();
+  });
 </script>
 </body>
 </html>
